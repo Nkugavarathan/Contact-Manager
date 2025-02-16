@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 
 function AddContact({ addContact }) {
-  const [name, setName] = useState()
-  const [email, setEmail] = useState()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
 
   const add = (e) => {
     e.preventDefault()
@@ -41,7 +41,7 @@ function AddContact({ addContact }) {
             placeholder="Enter Name"
             name="name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)} //// Update state on change
           />
         </div>
 

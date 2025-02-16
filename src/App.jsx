@@ -13,6 +13,7 @@ function App() {
   useEffect(() => {
     localStorage.setItem("contacts", JSON.stringify(contacts))
   }, [contacts])
+
   // [{
   //   id: "1",
   //   name: "varathan",
