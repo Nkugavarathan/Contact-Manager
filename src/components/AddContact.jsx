@@ -1,9 +1,35 @@
-import React from "react"
+import React, { useState } from "react"
 
-function AddContact() {
+function AddContact({ addContact }) {
+  const [name, setName] = useState()
+  const [email, setEmail] = useState()
+
+  const add = (e) => {
+    e.preventDefault()
+
+    if (!name || !email) {
+      alert("All fields are required!")
+      return
+    }
+
+    // Create a new contact object
+    const newContact = {
+      id: Date.now().toString(), // Generate a unique ID
+      name,
+      email,
+    }
+
+    // Call the addContact function passed from App.js
+    addContact(newContact)
+
+    // Clear the input fields after submission
+    setName("")
+    setEmail("")
+  }
+
   return (
     <div>
-      <form action="/action_page.php">
+      <form action="/action_page.php" onSubmit={add}>
         <div className="mt-3">
           <label htmlFor="name" className="form-label">
             Name:
@@ -14,6 +40,8 @@ function AddContact() {
             id="name"
             placeholder="Enter Name"
             name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
@@ -27,6 +55,8 @@ function AddContact() {
             id="email"
             placeholder="Enter email"
             name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
