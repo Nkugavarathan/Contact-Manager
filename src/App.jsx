@@ -1,10 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import Header from "./components/Header"
 import AddContact from "./components/AddContact"
 import ContactList from "./components/ContactList"
-
+import "./App.css"
 function App() {
-  const contacts = [
+  const [contacts, setContacts] = useState([
     {
       id: "1",
       name: "varathan",
@@ -15,11 +15,16 @@ function App() {
       name: "jiro",
       email: "jiro14@gmail.com",
     },
-  ]
+  ])
+  const addContact = (newContact) => {
+    setContacts((prevContacts) => {
+      ;[...prevContacts, newContact]
+    })
+  }
   return (
     <div className="container">
       <Header />
-      <AddContact />
+      <AddContact addContact={addContact} />
       <ContactList contacts={contacts} />
     </div>
   )
