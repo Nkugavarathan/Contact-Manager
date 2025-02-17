@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react"
+import { BrowserRouter as Router, Swtich, Route } from "react-router-dom"
+
 import Header from "./components/Header"
 import AddContact from "./components/AddContact"
 import ContactList from "./components/ContactList"
 import "./App.css"
+
 function App() {
   // Load contacts from localStorage or use an empty array
   const [contacts, setContacts] = useState(() => {
@@ -40,9 +43,11 @@ function App() {
   }
   return (
     <div className="container">
-      <Header />
-      <AddContact addContact={addContact} />
-      <ContactList contacts={contacts} />
+      <Router>
+        <Header />
+        <AddContact addContact={addContact} />
+        <ContactList contacts={contacts} />
+      </Router>
     </div>
   )
 }
