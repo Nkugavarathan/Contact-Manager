@@ -36,21 +36,30 @@
 
 import React from "react"
 import ContactCard from "./ContactCard"
+import { Link } from "react-router-dom"
 
 const ContactList = ({ contacts, deleteContact }) => {
   return (
-    <div className="mt-4">
+    <div className="mt-3">
       <h3>Contact List</h3>
       <div className="list-group">
-        {contacts.map(({ id, name, email }) => (
-          <ContactCard
-            key={id}
-            id={id}
-            name={name}
-            email={email}
-            deleteContact={deleteContact}
-          />
-        ))}
+        <Link to="/add">
+          <button className="btn btn-primary my-3 ">Add Contact</button>
+        </Link>
+
+        {contacts.length > 0 ? (
+          contacts.map(({ id, name, email }) => (
+            <ContactCard
+              key={id}
+              id={id}
+              name={name}
+              email={email}
+              deleteContact={deleteContact}
+            />
+          ))
+        ) : (
+          <p>No contacts found. Please add one!</p>
+        )}
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { BrowserRouter as Route, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom"
 
 import Header from "./components/Header"
 import AddContact from "./components/AddContact"
@@ -50,8 +50,27 @@ function App() {
   }
 
   return (
-    <div className="container">
-      {/* <Router>
+    <Router>
+      <div className="container">
+        <Header />
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ContactList contacts={contacts} deleteContact={deleteContact} />
+            }
+          />
+          <Route path="/add" element={<AddContact addContact={addContact} />} />
+        </Routes>
+      </div>
+    </Router>
+  )
+}
+
+export default App
+
+/* <Router>
         <Header />
         <Routes>
           <Route path="/add" element={<AddContact addContact={addContact} />} />
@@ -63,21 +82,4 @@ function App() {
             }
           />
         </Routes>
-      </Router> */}
-      <Header />
-      <Link to="/add">
-        <button className="btn btn-primary mt-3">Add Contact</button>
-      </Link>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <ContactList contacts={contacts} deleteContact={deleteContact} />
-          }
-        />
-        <Route path="/add" element={<AddContact addContact={addContact} />} />
-      </Routes>
-    </div>
-  )
-}
-export default App
+      </Router> */
