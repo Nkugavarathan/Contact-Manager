@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { BrowserRouter as Route, Routes } from "react-router-dom"
 
 import Header from "./components/Header"
 import AddContact from "./components/AddContact"
@@ -42,15 +42,41 @@ function App() {
     setContacts((prevContacts) => [newContact, ...prevContacts]) // New contacts come first
   }
 
+  // Delete a contact
+  const deleteContact = (id) => {
+    setContacts((prevContacts) =>
+      prevContacts.filter((contact) => contact.id !== id)
+    )
+  }
+
   return (
     <div className="container">
-      <Router>
+      {/* <Router>
         <Header />
         <Routes>
           <Route path="/add" element={<AddContact addContact={addContact} />} />
-          <Route path="/" exact element={<ContactList contacts={contacts} />} />
+          <Route
+            path="/"
+            exact
+            element={
+              <ContactList contacts={contacts} deleteContact={deleteContact} />
+            }
+          />
         </Routes>
-      </Router>
+      </Router> */}
+      <Header />
+      <Link to="/add">
+        <button className="btn btn-primary mt-3">Add Contact</button>
+      </Link>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ContactList contacts={contacts} deleteContact={deleteContact} />
+          }
+        />
+        <Route path="/add" element={<AddContact addContact={addContact} />} />
+      </Routes>
     </div>
   )
 }
