@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { BrowserRouter as Router, Swtich, Route } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 
 import Header from "./components/Header"
 import AddContact from "./components/AddContact"
@@ -39,14 +39,17 @@ function App() {
   // }],
 
   const addContact = (newContact) => {
-    setContacts((prevContacts) => [...prevContacts, newContact])
+    setContacts((prevContacts) => [newContact, ...prevContacts]) // New contacts come first
   }
+
   return (
     <div className="container">
       <Router>
         <Header />
-        <AddContact addContact={addContact} />
-        <ContactList contacts={contacts} />
+        <Routes>
+          <Route path="/add" element={<AddContact addContact={addContact} />} />
+          <Route path="/" exact element={<ContactList contacts={contacts} />} />
+        </Routes>
       </Router>
     </div>
   )
